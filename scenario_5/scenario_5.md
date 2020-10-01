@@ -2,7 +2,7 @@
 
 Torna all'[indice](../index.md)
 
-Questo scenario, costruito a partire dallo [scenario 4](../scenario_4/scenario_4.md), riguarda il:
+Questo scenario, costruito a partire dallo [scenario 3](../scenario_3/scenario_3.md), riguarda il:
 - rappresentare il livello di criticità di un tasks.
 - rappresentare se un certo tasks è migrabile o meno.
 - rappresentare le varie modalità, in relazione al livello di criticità, di esecuzione di un core.
