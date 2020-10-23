@@ -62,7 +62,7 @@ Bisogna:
     - [X] `Active_CPU := Target_CPU;` 
     - servirà un lock per ogni coda. Serve definire un protocollo di acquisizione dei lock in maniera tale da assicurare l'assenza di deadlock;
   - [X] incrementare, per tutti questi task, `Task_Data_Log.Times_Migrated`; 
-  - [ ] i task migrabili nella coda dei **sospesi** della CPU A devono essere inseriti nella coda dei **sospesi** della CPU B
+  - [X] i task migrabili nella coda dei **sospesi** della CPU A devono essere inseriti nella coda dei **sospesi** della CPU B
     - ha senso? si rifletta sul fatto che forse è meglio migrare un task quando questo effettivamente viene risvegliato. Migrare un task sospeso dalla coda dei sospesi di A in quella di B, per poi riportarlo in quella di A, sarebbe inutile e forse troppo costoso;
     - in tal caso, si potrebbe fare che:
       1. se un task viene risvegliato;
@@ -71,7 +71,7 @@ Bisogna:
       4. la sua `Base_CPU` sta eseguendo in ***HI-crit*** mode; 
    
         allora quel task deve essere inserito nella coda dei pronti dell'altro core;
-    - [ ] incrementare, per tutti questi task, `Task_Data_Log.Times_Migrated`;
+    - [X] incrementare, per tutti questi task, `Task_Data_Log.Times_Migrated`;
 - [X] verificare il tutto facendo sì che la CPU A sia la CPU**1**. Allora, a questo punto, lo stato dell'esecuzione sarà:\
 $`Y(1)_1 = LO_1 \cup HI_1`$\
 $`Y(1)_2 = LO_2 \cup HI_2 \cup MIG_2 \cup MIG_1`$\
@@ -85,12 +85,12 @@ $`S_2' = Y(2)_1 \cup Y(2)_2`$\
 Si è quindi osservata la transazione $`S \rightarrow S_2'`$ 
 
 ## Scenario 12.2
-- [ ] alla rilevazione di un *idle tick* sulla CPU A
-  - [ ] i tasks con `Base_CPU = A` che sono nella coda dei pronti della CPU B devono essere spostati nella coda dei pronti della CPU A
-    - [ ] incrementare `Task_Data_Log.Times_Restored`
+- [X] alla rilevazione di un *idle tick* sulla CPU A
+  - [X] i tasks con `Base_CPU = A` che sono nella coda dei pronti della CPU B devono essere spostati nella coda dei pronti della CPU A
+    - [X] incrementare `Task_Data_Log.Times_Restored`
     - come comportarsi se uno dei tasks con `Base_CPU = A` sta eseguendo sulla CPU B? In teoria, questo task dovrebbe essere fermato per poi essere messo nella coda dei pronti della CPU A.
       - sarà sufficiente spostarlo da una coda all'altra. Questo perchè, nel runtime, al termina delle operazioni di modifica delle code, viene controllato se è necessario o meno un context switch. Un context switch è necessario se e solo se la testa della coda dei pronti è stata aggiornata, che è ciò che succede in questo caso specifico. 
-  - [ ] i tasks con `Base_CPU = A` che sono nella coda dei **sospesi** della CPU B devono essere spostati nella coda dei **pronti** della CPU A
+  - [X] i tasks con `Base_CPU = A` che sono nella coda dei **sospesi** della CPU B devono essere spostati nella coda dei **pronti** della CPU A
     -  come prima: ha senso? forse è meglio ripristinare un task solo quando esso viene effettivamente svegliato.
     -  in tal caso, si potrebbe fare che:
        1. se un task viene risvegliato;
@@ -99,15 +99,15 @@ Si è quindi osservata la transazione $`S \rightarrow S_2'`$
        4. la sua `Base_CPU` sta eseguendo in ***LO-crit*** mode;
 
         allora quel task deve essere inserito nella coda dei pronti della sua `Base_CPU`, ovvero essere ripristinato alla sua CPU originale;
-    - [ ] incrementare, per tutti questi task, `Task_Data_Log.Times_Migrated`; 
+    - [X] incrementare, per tutti questi task, `Task_Data_Log.Times_Migrated`; 
 
-- [ ] verificare il tutto facendo sì che la CPU A sia la CPU**1**. Allora, a questo punto, lo stato dell'esecuzione sarà:\
+- [X] verificare il tutto facendo sì che la CPU A sia la CPU**1**. Allora, a questo punto, lo stato dell'esecuzione sarà:\
 $`X_1 = LO_1 \cup HI_1 \cup MIG_1`$\
 $`X_2 = LO_2 \cup HI_2 \cup MIG_2`$\
 $`S = X_1 \cup X_2`$\
 Si è quindi osservata la transazione $`S_1' \rightarrow S`$
 
-- [ ] verificare il tutto facendo sì che la CPU A sia la CPU**2**. Allora, a questo punto, lo stato dell'esecuzione sarà:\
+- [X] verificare il tutto facendo sì che la CPU A sia la CPU**2**. Allora, a questo punto, lo stato dell'esecuzione sarà:\
 $`X_1 = LO_1 \cup HI_1 \cup MIG_1`$\
 $`X_2 = LO_2 \cup HI_2 \cup MIG_2`$\
 $`S = X_1 \cup X_2`$\
